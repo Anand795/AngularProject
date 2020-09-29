@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smi.allone.domain.Admin;
 import com.smi.allone.domain.User;
-import com.smi.allone.repository.AdminRepository;
 import com.smi.allone.repository.UserRepository;
 import com.smi.allone.service.ServiceDB;
 
@@ -19,31 +17,31 @@ import com.smi.allone.service.ServiceDB;
 public class AdminController {
 
 	@Autowired
-	private AdminRepository adminRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
 	private ServiceDB serviceDb;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String adminLogin(@RequestBody Admin admin) {
-		String email = admin.getEmail();
-		String password = admin.getPassword();
-		Admin emaildb = serviceDb.findByAdminEmail(email);
-		Admin passwordDb = serviceDb.findByAdminPassword(password);
-		if(emaildb != null && passwordDb != null) {
-			return "Logged in Successfully";
-		}
-		else {
-			return "Login UnSuccessful";
+	@RequestMapping(value = "/login", method = RequestMethod.POST , produces = "application/json")
+	public User adminLogin(@RequestBody User user) {
+		String email = user.getEmail();
+		String password = user.getPassword();
+		User userdetail = userRepository.findByEmail(email);
+		
+//	
+		if (serviceDb.checking(user)) {
+			return userdetail;
+		} else {
+			return userdetail;
 		}
 	}
 	
 //	User Register
-	@RequestMapping(value="/register", method= RequestMethod.POST)
-	public String userRegister(@RequestBody Admin admin) {
-		System.out.println("----------");
-		adminRepository.save(admin);
-		return "Registered successfully";
-	}
+//	@RequestMapping(value="/register", method= RequestMethod.POST)
+//	public String userRegister(@RequestBody Admin admin) {
+//		System.out.println("----------");
+//		adminRepository.save(admin);
+//		return "Registered successfully";
+//	}
 
 }

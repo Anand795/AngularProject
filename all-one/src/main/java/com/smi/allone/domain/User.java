@@ -32,9 +32,11 @@ public class User {
 	
 	private String mobile;
 	
-	@OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-	@JoinTable(name = "identify_role" , joinColumns = @JoinColumn(name = "user_id") , inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private String Role;
+	
+//	@OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+//	@JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id") , inverseJoinColumns = @JoinColumn(name = "role_id"))
+//	private Set<Role> roles;
 
 	public int getUserID() {
 		return userID;
@@ -76,27 +78,20 @@ public class User {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
-	
-	
 
-	public Set<Role> getRoles() {
-		return roles;
+	public String getRole() {
+		return Role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-        for (Role role : roles) {
-            role.setUser(this);
-        }
+	public void setRole(String role) {
+		Role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", mobile=" + mobile + "]";
+				+ ", mobile=" + mobile + ", Role=" + Role + "]";
 	}
-	
 	
 	
 

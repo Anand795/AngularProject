@@ -121,6 +121,13 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Product [id=" + id + ", productName=" + productName + ", brand=" + brand + ", size=" + size + ", color="
+//				+ color + ", warranty=" + warranty + ", price=" + price + ", description=" + description
+//				+ ", stockLevel=" + stockLevel + ", stockSold=" + stockSold + ", image=" + image + "]";
+//	}
 	
 	
 }
