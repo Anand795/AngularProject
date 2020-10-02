@@ -28,7 +28,7 @@ public class UserController {
 	private ServiceDB serviceDb;
 
 //	user login
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST , produces = "application/json")
 	public User userLogin(@RequestBody User user) {
 		String email = user.getEmail();
 		String password = user.getPassword();

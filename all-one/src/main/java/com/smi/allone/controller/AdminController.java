@@ -28,7 +28,7 @@ public class AdminController {
 		String password = user.getPassword();
 		User userdetail = userRepository.findByEmail(email);
 		
-//	
+
 		if (serviceDb.checking(user)) {
 			return userdetail;
 		} else {
@@ -36,12 +36,12 @@ public class AdminController {
 		}
 	}
 	
-//	User Register
-//	@RequestMapping(value="/register", method= RequestMethod.POST)
-//	public String userRegister(@RequestBody Admin admin) {
-//		System.out.println("----------");
-//		adminRepository.save(admin);
-//		return "Registered successfully";
-//	}
+//	Admin Register
+	@RequestMapping(value="/register", method= RequestMethod.POST)
+	public String userRegister(@RequestBody User user) {
+		user.setRole("ADMIN");
+		userRepository.save(user);
+		return "Registered successfully";
+	}
 
 }

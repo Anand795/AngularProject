@@ -1,9 +1,19 @@
 package com.smi.allone.domain;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,26 +23,32 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String productName;
-	
+
 	private String brand;
-	
+
 	private String size;
-	
+
 	private String color;
-	
+
 	private String warranty;
-	
+
 	private String price;
-	
+
 	private String description;
-	
+
 	private String stockLevel;
-	
+
 	private String stockSold;
-	
+
 	private String image;
+
+	
+	@JoinTable(name = "category_products", joinColumns = @JoinColumn(name = "pro_id"), inverseJoinColumns = {
+			@JoinColumn(name = "cat_id", referencedColumnName = "id") })
+	@OneToMany(cascade = CascadeType.MERGE , fetch = FetchType.EAGER)
+	private Set<Category> category;
 
 	public int getId() {
 		return id;
@@ -122,12 +138,21 @@ public class Product {
 		this.image = image;
 	}
 
+	public Set<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(Set<Category> category) {
+		this.category = category;
+	}
+
+	
+
 //	@Override
 //	public String toString() {
 //		return "Product [id=" + id + ", productName=" + productName + ", brand=" + brand + ", size=" + size + ", color="
 //				+ color + ", warranty=" + warranty + ", price=" + price + ", description=" + description
 //				+ ", stockLevel=" + stockLevel + ", stockSold=" + stockSold + ", image=" + image + "]";
 //	}
-	
-	
+
 }
