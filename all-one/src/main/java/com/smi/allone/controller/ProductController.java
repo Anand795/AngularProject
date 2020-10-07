@@ -100,7 +100,6 @@ public class ProductController {
 	@PutMapping(value = "/updateproducts/{id}", produces = "application/json")
 	public String updateProduct(@PathVariable Integer id, @RequestBody Product productDetails) {
 		
-		System.out.println("--------");
 		Product product = productRepository.findById(id).get();
 		
 		product.setProductName(productDetails.getProductName());

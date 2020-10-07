@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smi.allone.bean.CartPro;
 import com.smi.allone.bean.CategoryPro;
+import com.smi.allone.domain.Cart;
 import com.smi.allone.domain.Category;
+import com.smi.allone.domain.Product;
 import com.smi.allone.domain.User;
+import com.smi.allone.repository.CartRepository;
 import com.smi.allone.repository.CategoryRepository;
 import com.smi.allone.repository.UserRepository;
 
@@ -21,6 +25,9 @@ public class ServiceDB {
 	
 	@Autowired
 	private CategoryRepository catRepository;
+	
+	@Autowired
+	private CartRepository cartRepository;
 	
 	
 	
@@ -59,5 +66,25 @@ public class ServiceDB {
 		return b;
 		
 	}
- 	
+
+	public Cart addToCart(int uid, int pid) {
+		Cart cart = new Cart();
+		cart.setUserId(uid);
+		cart.setProductId(pid);
+		cart.setQuantity(1);
+		return cartRepository.save(cart);
+	}
+	public Cart addToCartIFExists(int uid, int pid , int qty) {
+		Cart cart = new Cart();
+		cart.setUserId(uid);
+		cart.setProductId(pid);
+		cart.setQuantity(qty);
+		return cartRepository.save(cart);
+	}
+
+	public CartPro setValueCartPro(List<Product> productList, List<Cart> cartList) {
+		return new CartPro();
+	}
+
+
 }
